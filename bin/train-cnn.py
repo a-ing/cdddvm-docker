@@ -6,7 +6,7 @@ from keras.layers import Conv3D, MaxPool3D, Flatten, Dense, Dropout, Input, Batc
 from keras.models import Model
 
 # load the data
-with h5py.File('../input/full_dataset_vectors.h5', 'r') as hf:
+with h5py.File('full_dataset_vectors.h5', 'r') as hf:
     x_train = hf["X_train"][:]
     y_train = hf["y_train"][:]
     x_test = hf["X_test"][:]
