@@ -6,7 +6,7 @@ from keras.layers import Conv3D, MaxPool3D, Flatten, Dense, Dropout, Input, Batc
 from keras.models import Model
 
 # load the data
-with h5py.File('full_dataset_vectors.h5', 'r') as hf:
+with h5py.File('../input/full_dataset_vectors.h5', 'r') as hf:
     x_train = hf["X_train"][:]
     y_train = hf["y_train"][:]
     x_test = hf["X_test"][:]
@@ -21,15 +21,13 @@ def array_to_color(array, cmap="Oranges"):
 xtrain = np.ndarray((x_train.shape[0], 4096, 3))
 for i in range(x_train.shape[0]):
     xtrain[i] = array_to_color(x_train[i])
-    if i % 1000 == 0:
-        print(i)
+
 
 # translate the test data
 xtest = np.ndarray((x_test.shape[0], 4096, 3))
 for i in range(x_test.shape[0]):
     xtest[i] = array_to_color(x_test[i])
-    if i % 1000 == 0:
-        print(i)
+
 
 
 # keras inputdata should be 5D shape, so we shoule reshape the data
