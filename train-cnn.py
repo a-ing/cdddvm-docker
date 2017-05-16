@@ -22,13 +22,10 @@ xtrain = np.ndarray((x_train.shape[0], 4096, 3))
 for i in range(x_train.shape[0]):
     xtrain[i] = array_to_color(x_train[i])
 
-
 # translate the test data
 xtest = np.ndarray((x_test.shape[0], 4096, 3))
 for i in range(x_test.shape[0]):
     xtest[i] = array_to_color(x_test[i])
-
-
 
 # keras inputdata should be 5D shape, so we shoule reshape the data
 xtrain = xtrain.reshape(10000, 16, 16, 16, 3)
