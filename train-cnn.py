@@ -2,10 +2,12 @@ import os
 import h5py
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import keras
 import json
 from keras.layers import Conv3D, MaxPool3D, Flatten, Dense, Dropout, Input, BatchNormalization
 from keras.models import Model
+from keras.optimizers import SGD
 
 
 # load the data
@@ -66,13 +68,16 @@ model = get_model()
 
 # train our model
 model.fit(x=xtrain[:20], y=y_train[:20], batch_size=5, epochs=10, validation_split=0.2)
+print('Train finished!')
 model.evaluate(xtest, y_test, verbose=0)
 model.save_weights('saved_weights.h5')
+print('Weights saved!')
 model = get_model('saved_weights.h5')
 sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(optimizer=sgd, loss='categorical_crossentropy')
 out=model.predict(xtest)
 out=pd.DataFrame(out)
 out.to_csv('result.csv')
+print('Save result to "result.csv"!')
 
 
